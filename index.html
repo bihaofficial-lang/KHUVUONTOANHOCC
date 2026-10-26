@@ -227,9 +227,9 @@ footer{color:#34734d;text-shadow:0 1px #fff8;margin:9px auto}
 .answer:nth-child(4) .fruit-emoji{animation-delay:-2.1s!important}
 .firework-particle{position:fixed;z-index:10000;pointer-events:none;font-size:19px;font-weight:900;text-shadow:0 0 9px currentColor;animation:fireworkBurst .95s cubic-bezier(.12,.72,.2,1) forwards}
 @keyframes fireworkBurst{0%{transform:translate(0,0) scale(.25) rotate(0);opacity:0}12%{opacity:1}78%{opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(1.35) rotate(180deg);opacity:0}}
-/* Gấu nhỏ đứng trong vườn và nhún nhảy chào người chơi */
-@keyframes bearWiggle{0%,100%{transform:translateY(0) rotate(-4deg)}25%{transform:translateY(-7px) rotate(4deg)}50%{transform:translateY(-2px) rotate(-2deg)}75%{transform:translateY(-8px) rotate(5deg)}}
-.orchard-banner .garden-bear{position:relative;z-index:2;display:inline-block;font-size:clamp(32px,5.4vw,55px);transform-origin:bottom center;animation:bearWiggle 1.8s ease-in-out infinite!important;filter:drop-shadow(0 7px 3px #64432155)}
+/* Ong nhỏ bay lượn qua khu vườn */
+@keyframes beeFlight{0%,100%{left:2%;top:10px;transform:translateY(0) rotate(-10deg)}25%{left:30%;top:0;transform:translateY(-8px) rotate(8deg)}52%{left:68%;top:12px;transform:translateY(4px) rotate(-5deg)}78%{left:38%;top:24px;transform:translateY(-5px) rotate(10deg)}}
+.orchard-banner .garden-bee{position:absolute!important;z-index:3;display:inline-block;font-size:clamp(30px,5vw,48px);animation:beeFlight 6s ease-in-out infinite!important;filter:drop-shadow(0 5px 4px #805d2980)}
 /* Kéo thả bằng ngón tay trên thiết bị cảm ứng */
 .answer{touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab}
 .answer.touch-dragging{position:fixed!important;z-index:10000!important;opacity:.96!important;transform:scale(1.04)!important;pointer-events:none!important;filter:drop-shadow(0 15px 18px #244b3470)!important}
@@ -255,7 +255,7 @@ footer{color:#34734d;text-shadow:0 1px #fff8;margin:9px auto}
 <section id="game" class="card hide">
 <h2 class="game-heading">Bước 3: Đọc câu hỏi và kéo đáp án</h2>
 <p class="game-instruction">Tính nhẩm, chọn thẻ số rồi kéo vào giỏ câu hỏi</p>
-<div class="orchard-banner" aria-hidden="true"><span>🌳</span><span>🍎</span><span>🌻</span><span>🍐</span><span>🌳</span><span class="garden-bear" aria-label="Gấu nhỏ trong khu vườn">🐻</span></div><div class="game-meta"><span id="count">Câu 1 / 15</span></div>
+<div class="orchard-banner" aria-hidden="true"><span>🌳</span><span>🍎</span><span>🌻</span><span>🍐</span><span>🌳</span><span class="garden-bee" aria-label="Ong nhỏ bay trong khu vườn">🐝</span></div><div class="game-meta"><span id="count">Câu 1 / 15</span></div>
 <div class="bar"><div id="fill" class="fill"></div></div>
 <div class="progressrow" style="justify-content:flex-end;margin:-13px 0 4px"><span>🌼 <span id="liveScore">0</span> điểm</span></div>
 <div id="gardenline" class="gardenline" aria-label="Hoa đã nở"></div>
