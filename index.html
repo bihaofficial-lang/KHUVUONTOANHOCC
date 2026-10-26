@@ -231,7 +231,6 @@ footer{color:#34734d;text-shadow:0 1px #fff8;margin:9px auto}
 @keyframes beeFlight{0%,100%{left:2%;top:10px;transform:translateY(0) rotate(-10deg)}25%{left:30%;top:0;transform:translateY(-8px) rotate(8deg)}52%{left:68%;top:12px;transform:translateY(4px) rotate(-5deg)}78%{left:38%;top:24px;transform:translateY(-5px) rotate(10deg)}}
 .orchard-banner .garden-bee{position:absolute!important;z-index:3;display:inline-block;font-size:clamp(30px,5vw,48px);animation:beeFlight 6s ease-in-out infinite!important;filter:drop-shadow(0 5px 4px #805d2980)}
 /* Kéo thả bằng ngón tay trên thiết bị cảm ứng */
-.answer{touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab}
 .answer{touch-action:manipulation;user-select:none;-webkit-user-select:none;cursor:grab}
 .answer.touch-dragging{position:fixed!important;z-index:10000!important;opacity:.96!important;transform:scale(1.04)!important;pointer-events:none!important;filter:drop-shadow(0 15px 18px #244b3470)!important}
 .touch-ghost{display:none!important}
@@ -243,7 +242,6 @@ footer{color:#34734d;text-shadow:0 1px #fff8;margin:9px auto}
 <div class="top"><div class="brand">🌿 TOÁN VUI LỚP 3</div><button id="musicBtn" class="music" onclick="toggleMusic()" aria-pressed="false">🔇 Bật nhạc</button><div class="score-pill">🌼 <span id="topScore">0</span> điểm</div></div>
 <section id="start" class="card hero">
 <div class="garden-scene" aria-hidden="true"><span class="sun">☀️</span><div class="hill one"></div><div class="hill two"></div><span class="flower f1">🌷</span><span class="flower f2">🌻</span><span class="flower f3">🌼</span><span class="bee">🐝</span></div>
-<span class="tag">15 CÂU · TĂNG DẦN ĐỘ KHÓ</span>
 <span class="tag">10 CÂU · LUYỆN NHÂN, CHIA VÀ BIỂU THỨC</span>
 <h1>KHU VƯỜN<br>TOÁN HỌC</h1>
 <p class="sub">Giải các thử thách <b>phép nhân, phép chia và biểu thức có dấu ngoặc</b> để giúp khu vườn nở hoa! Mỗi câu đúng được 10 điểm. Kéo quả có đáp án vào giỏ; trên điện thoại, chạm một lần vào quả để trả lời hoặc chạm giữ rồi kéo vào giỏ. Nhạc nền tự bật khi bắt đầu.</p>
@@ -257,7 +255,6 @@ footer{color:#34734d;text-shadow:0 1px #fff8;margin:9px auto}
 <section id="game" class="card hide">
 <h2 class="game-heading">Bước 3: Đọc câu hỏi và kéo đáp án</h2>
 <p class="game-instruction">Tính nhẩm, chọn thẻ số rồi kéo vào giỏ câu hỏi</p>
-<div class="orchard-banner" aria-hidden="true"><span>🌳</span><span>🍎</span><span>🌻</span><span>🍐</span><span>🌳</span><span class="garden-bee" aria-label="Ong nhỏ bay trong khu vườn">🐝</span></div><div class="game-meta"><span id="count">Câu 1 / 15</span></div>
 <div class="orchard-banner" aria-hidden="true"><span>🌳</span><span>🍎</span><span>🌻</span><span>🍐</span><span>🌳</span><span class="garden-bee" aria-label="Ong nhỏ bay trong khu vườn">🐝</span></div><div class="game-meta"><span id="count">Câu 1 / 10</span></div>
 <div class="bar"><div id="fill" class="fill"></div></div>
 <div class="progressrow" style="justify-content:flex-end;margin:-13px 0 4px"><span>🌼 <span id="liveScore">0</span> điểm</span></div>
@@ -273,22 +270,6 @@ footer{color:#34734d;text-shadow:0 1px #fff8;margin:9px auto}
 <footer>🌱 Cố gắng từng câu, khu vườn sẽ nở rộ! 🌷</footer>
 </main>
 <script>
-const qs=[
-{t:"Bước 1 · Bảng nhân",q:"3 × 4 = ?",a:["7","12","14","16"],c:1,e:"3 × 4 = 12."},
-{t:"Bước 1 · Bảng nhân",q:"7 × 8 = ?",a:["54","56","63","64"],c:1,e:"7 × 8 = 56."},
-{t:"Bước 1 · Bảng chia",q:"36 ÷ 4 = ?",a:["8","9","10","12"],c:1,e:"36 ÷ 4 = 9 vì 4 × 9 = 36."},
-{t:"Bước 1 · Bảng chia",q:"81 ÷ 9 = ?",a:["7","8","9","10"],c:2,e:"81 ÷ 9 = 9 vì 9 × 9 = 81."},
-{t:"Bước 2 · Nhân số có hai chữ số",q:"12 × 4 = ?",a:["36","42","48","52"],c:2,e:"12 × 4 = 48."},
-{t:"Bước 2 · Chia số có hai chữ số",q:"96 ÷ 4 = ?",a:["22","24","26","28"],c:1,e:"96 ÷ 4 = 24 vì 4 × 24 = 96."},
-{t:"Bước 2 · Nhân",q:"23 × 3 = ?",a:["59","66","69","72"],c:2,e:"20 × 3 = 60 và 3 × 3 = 9; 60 + 9 = 69."},
-{t:"Bước 2 · Chia",q:"96 ÷ 3 = ?",a:["22","31","32","33"],c:2,e:"96 ÷ 3 = 32 vì 3 × 32 = 96."},
-{t:"Bước 3 · Thử thách nhân",q:"125 × 3 = ?",a:["275","325","375","425"],c:2,e:"125 × 3 = 375."},
-{t:"Bước 3 · Thử thách chia",q:"248 ÷ 4 = ?",a:["52","60","62","64"],c:2,e:"248 ÷ 4 = 62 vì 4 × 62 = 248."},
-{t:"Bước 4 · Biểu thức có ngoặc",q:"10 × (5 + 6) = ?",a:["56","100","110","160"],c:2,e:"Tính trong ngoặc trước: 5 + 6 = 11. Sau đó 10 × 11 = 110."},
-{t:"Bước 4 · Biểu thức có ngoặc",q:"48 ÷ (2 × 3) = ?",a:["6","8","12","24"],c:1,e:"Tính trong ngoặc trước: 2 × 3 = 6. Sau đó 48 ÷ 6 = 8."},
-{t:"Bước 4 · Biểu thức có ngoặc",q:"(25 + 15) × 4 = ?",a:["120","150","160","180"],c:2,e:"Tính trong ngoặc trước: 25 + 15 = 40. Sau đó 40 × 4 = 160."},
-{t:"Bước 4 · Thử thách chia",q:"420 ÷ (5 × 7) = ?",a:["10","12","14","15"],c:1,e:"Tính trong ngoặc trước: 5 × 7 = 35. Sau đó 420 ÷ 35 = 12."},
-{t:"Bước 5 · Bài toán hai bước",q:"Có 7 khay, mỗi khay có 24 cây con. Chia đều tất cả cây vào 4 luống. Mỗi luống có bao nhiêu cây?",a:["38 cây","40 cây","42 cây","48 cây"],c:2,e:"Tính tổng cây: 7 × 24 = 168. Chia đều: 168 ÷ 4 = 42 cây mỗi luống."}
 const qs=[
 {t:"Bảng nhân",q:"Tính: 7 × 6 = ?",a:["42","48","36","56"],c:0,e:"7 × 6 = 42."},
 {t:"Bảng chia",q:"Tính: 48 : 8 = ?",a:["6","7","8","9"],c:0,e:"48 : 8 = 6 vì 8 × 6 = 48."},
@@ -312,22 +293,14 @@ async function startMusic(){if(!audioCtx)audioCtx=new(window.AudioContext||windo
 async function toggleMusic(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==="suspended")await audioCtx.resume();musicOn=!musicOn;$("musicBtn").textContent=musicOn?"🎵 Tắt nhạc":"🔇 Bật nhạc";$("musicBtn").setAttribute("aria-pressed",String(musicOn));if(musicOn)playTune();else clearTimeout(musicTimer)}
 function begin(){const name=$("studentName").value.trim(),className=$("studentClass").value.trim();if(!name||!className){alert("Em hãy nhập họ tên và lớp trước khi bắt đầu nhé!");(!name?$("studentName"):$("studentClass")).focus();return}student={name,className};startMusic();i=0;score=0;missed=[];attemptAnswers=[];lastSubmissionPayload=null;$("start").classList.add("hide");$("result").classList.add("hide");$("game").classList.remove("hide");draw()}
 function draw(){
- locked=false;const x=qs[i];$("count").textContent="Câu "+(i+1)+" / 15";$("liveScore").textContent=score;$("topScore").textContent=score;
  locked=false;const x=qs[i];$("count").textContent="Câu "+(i+1)+" / "+qs.length;$("liveScore").textContent=score;$("topScore").textContent=score;
  $("fill").style.width=((i+1)/qs.length*100)+"%";$("topic").textContent=x.t;$("question").textContent=x.q;
  $("gardenline").textContent="🌱"+"🌼".repeat(Math.min(12,Math.floor(score/10)))+"🌱";
  $("feedback").className="feedback hide";$("next").classList.add("hide");$("answers").innerHTML="";selectedFruit=null;
  $("basketText").textContent="Giỏ câu hỏi";$("basketZone").classList.remove("over","ready","accept","retry");
  const fruits=["🍎","🍐","🍊","🍓"];
- x.a.forEach((v,n)=>{const b=document.createElement("button");b.className="answer";b.draggable=true;b.innerHTML='<span class="letter">'+ "ABCD"[n] +'</span><span class="fruit-emoji" aria-hidden="true">'+fruits[n]+'</span><span class="fruit-text">'+v+'</span>';b.setAttribute("aria-label","Quả "+("ABCD"[n])+", đáp án "+v);b.onclick=()=>{if(Date.now()<(window.touchClickBlockedUntil||0))return;selectFruit(n)};b.draggable=!(window.matchMedia&&window.matchMedia("(pointer: coarse)").matches);b.addEventListener("touchstart",e=>{if(locked||activeFruitTouch)return;const t=e.changedTouches[0],rect=b.getBoundingClientRect(),origin=b.parentNode,placeholder=document.createElement("div"),originalStyle=b.getAttribute("style");e.preventDefault();b.draggable=false;window.touchClickBlockedUntil=Date.now()+1200;placeholder.style.width=rect.width+"px";placeholder.style.height=rect.height+"px";origin.insertBefore(placeholder,b);document.body.appendChild(b);activeFruitTouch={n,button:b,origin,placeholder,originalStyle,identifier:t.identifier,offsetX:t.clientX-rect.left,offsetY:t.clientY-rect.top,startX:t.clientX,startY:t.clientY};b.classList.add("touch-dragging");b.style.position="fixed";b.style.left=(t.clientX-activeFruitTouch.offsetX)+"px";b.style.top=(t.clientY-activeFruitTouch.offsetY)+"px";b.style.width=rect.width+"px";b.style.height=rect.height+"px";b.style.margin="0";b.style.zIndex="10000"},{passive:false});b.addEventListener("dragstart",e=>{e.dataTransfer.setData("text/plain",String(n));e.dataTransfer.effectAllowed="copy";b.classList.add("dragging")});b.addEventListener("dragend",()=>b.classList.remove("dragging"));$("answers").appendChild(b)})
  x.a.forEach((v,n)=>{const b=document.createElement("button");b.className="answer";b.draggable=true;b.innerHTML='<span class="letter">'+ "ABCD"[n] +'</span><span class="fruit-emoji" aria-hidden="true">'+fruits[n]+'</span><span class="fruit-text">'+v+'</span>';b.setAttribute("aria-label","Quả "+("ABCD"[n])+", đáp án "+v);b.onclick=()=>{if(Date.now()<(window.touchClickBlockedUntil||0))return;if((window.matchMedia&&window.matchMedia("(pointer: coarse)").matches)||navigator.maxTouchPoints>0)submitFruit(n);else selectFruit(n)};b.draggable=!(window.matchMedia&&window.matchMedia("(pointer: coarse)").matches);b.addEventListener("dragstart",e=>{e.dataTransfer.setData("text/plain",String(n));e.dataTransfer.effectAllowed="copy";b.classList.add("dragging")});b.addEventListener("dragend",()=>b.classList.remove("dragging"));$("answers").appendChild(b)})
 }
-let activeFruitTouch=null;
-function moveFruitGhost(x,y){if(!activeFruitTouch)return;const b=activeFruitTouch.button;b.style.left=(x-activeFruitTouch.offsetX)+"px";b.style.top=(y-activeFruitTouch.offsetY)+"px";const target=document.elementFromPoint(x,y),zone=$("basketZone");if(target&&zone.contains(target))zone.classList.add("touch-over");else zone.classList.remove("touch-over")}
-document.addEventListener("touchmove",e=>{if(!activeFruitTouch)return;const t=Array.from(e.changedTouches).find(x=>x.identifier===activeFruitTouch.identifier);if(t){e.preventDefault();moveFruitGhost(t.clientX,t.clientY)}},{passive:false});
-function finishFruitTouch(t,cancelled){if(!activeFruitTouch)return;const drag=activeFruitTouch,zone=$("basketZone"),target=t?document.elementFromPoint(t.clientX,t.clientY):null,dropped=!!(target&&zone.contains(target)),moved=!!(t&&Math.hypot(t.clientX-drag.startX,t.clientY-drag.startY)>12);drag.origin.insertBefore(drag.button,drag.placeholder);drag.placeholder.remove();if(drag.originalStyle===null)drag.button.removeAttribute("style");else drag.button.setAttribute("style",drag.originalStyle);drag.button.classList.remove("touch-dragging");activeFruitTouch=null;zone.classList.remove("touch-over");window.touchClickBlockedUntil=Date.now()+1200;if(!cancelled){if(dropped||!moved)submitFruit(drag.n);else selectFruit(drag.n)}}
-document.addEventListener("touchend",e=>{if(!activeFruitTouch)return;const t=Array.from(e.changedTouches).find(x=>x.identifier===activeFruitTouch.identifier);if(t){e.preventDefault();finishFruitTouch(t,false)}},{passive:false});
-document.addEventListener("touchcancel",e=>{const t=activeFruitTouch&&Array.from(e.changedTouches).find(x=>x.identifier===activeFruitTouch.identifier);if(t)finishFruitTouch(null,true)});function selectFruit(n){if(locked)return;selectedFruit=n;[...$("answers").children].forEach((b,k)=>b.classList.toggle("selected",k===n));$("basketZone").classList.add("ready");$("basketText").textContent="Đã chọn quả "+("ABCD"[n])+". Chạm vào giỏ để trả lời."}
 function selectFruit(n){if(locked)return;selectedFruit=n;[...$("answers").children].forEach((b,k)=>b.classList.toggle("selected",k===n));$("basketZone").classList.add("ready");$("basketText").textContent="Đã chọn quả "+("ABCD"[n])+". Chạm vào giỏ để trả lời."}
 function submitFruit(n){if(locked)return;if(n==null)n=selectedFruit;if(n==null){$("basketText").textContent="Hãy chọn một quả đáp án trước nhé!";return}selectedFruit=n;choose(n)}
 const basket=$("basketZone");
@@ -351,11 +324,9 @@ function choose(n){
 function advance(){i++;if(i<qs.length)draw();else finish()}
 function finish(){
  $("game").classList.add("hide");$("result").classList.remove("hide");
- const msg=score>=140?"Tuyệt vời! Khu vườn nở rộ rực rỡ!":score>=100?"Giỏi lắm! Khu vườn của em xanh tốt!":score>=60?"Khá lắm! Em đang tiến bộ từng bước!":"Cố lên nhé! Mỗi lượt chơi giúp em luyện tập thêm!";
  const msg=score>=90?"Tuyệt vời! Khu vườn nở rộ rực rỡ!":score>=70?"Giỏi lắm! Khu vườn của em xanh tốt!":score>=40?"Khá lắm! Em đang tiến bộ từng bước!":"Cố lên nhé! Mỗi lượt chơi giúp em luyện tập thêm!";
  const payload={submissionId:makeAttemptId(),name:student.name,className:student.className,score,correct:score/10,total:qs.length};
  lastSubmissionPayload=payload;
- $("result").innerHTML='<div class="medal">'+(score>=120?"🏆":score>=70?"🌻":"🌱")+'</div><span class="tag">HOÀN THÀNH 15 THỬ THÁCH</span><h1>'+msg+'</h1><div style="font-weight:800;color:#59734a">'+escapeHtml(student.name)+' · Lớp '+escapeHtml(student.className)+'</div><div class="score">'+score+'<small style="font-size:22px">/150</small></div><p class="sub">'+(missed.length?"Em có "+missed.length+" câu cần xem lại. Đọc đáp án đúng bên dưới nhé.":"Em trả lời đúng tất cả câu hỏi!")+'</p>'+(missed.length?'<div class="review"><b>🌿 Câu cần ôn lại</b>'+missed.map(m=>'<p>• '+escapeHtml(m.q)+'<br><b>Đáp án đúng:</b> '+escapeHtml(m.correct)+'</p>').join("")+'</div>':"")+'<p id="submitStatus" class="submit-status">Đang tự lưu điểm tổng lên Google Drive…</p><div class="result-actions"><button id="driveRetry" class="secondary" hidden onclick="submitToDrive(lastSubmissionPayload)">Thử gửi lại</button><button class="primary" onclick="begin()">Chơi lại 🔁</button></div>';
  $("result").innerHTML='<div class="medal">'+(score>=80?"🏆":score>=50?"🌻":"🌱")+'</div><span class="tag">HOÀN THÀNH 10 CÂU HỎI</span><h1>'+msg+'</h1><div style="font-weight:800;color:#59734a">'+escapeHtml(student.name)+' · Lớp '+escapeHtml(student.className)+'</div><div class="score">'+score+'<small style="font-size:22px">/100</small></div><p class="sub">'+(missed.length?"Em có "+missed.length+" câu cần xem lại. Đọc đáp án đúng bên dưới nhé.":"Em trả lời đúng tất cả câu hỏi!")+'</p>'+(missed.length?'<div class="review"><b>🌿 Câu cần ôn lại</b>'+missed.map(m=>'<p>• '+escapeHtml(m.q)+'<br><b>Đáp án đúng:</b> '+escapeHtml(m.correct)+'</p>').join("")+'</div>':"")+'<p id="submitStatus" class="submit-status">Đang tự lưu điểm tổng lên Google Drive…</p><div class="result-actions"><button id="driveRetry" class="secondary" hidden onclick="submitToDrive(lastSubmissionPayload)">Thử gửi lại</button><button class="primary" onclick="begin()">Chơi lại 🔁</button></div>';
  submitToDrive(payload);
 }
@@ -382,6 +353,7 @@ function submitToDrive(data){
 </script>
 </body>
 </html>
+
 
 
 
